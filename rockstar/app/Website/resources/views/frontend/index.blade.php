@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
-    <title>W3.CSS Website</title>
+    <title>{{ config('app.name', 'Rockstar') }}</title>
 </head>
 <body>
 <!-- Navigation -->
