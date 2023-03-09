@@ -43,6 +43,10 @@ RUN docker-php-ext-configure gd \
     xsl \
     zip
 
+# Enable NodeSource repository and install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -E -
+RUN apt-get update && apt-get install -y nodejs
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
