@@ -25,7 +25,10 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "L37sg0\\Rockstar\\": "app/Websites/L37sg0/Rockstar",
+            "L37sg0\\Rockstar\\Database\\Factories\\": "app/Websites/L37sg0/Rockstar/database/factories/",
+            "L37sg0\\Rockstar\\Database\\Seeders\\": "app/Websites/L37sg0/Rockstar/database/seeders/"
         }
     },
     "autoload-dev": {
