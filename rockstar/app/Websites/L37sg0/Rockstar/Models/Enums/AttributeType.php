@@ -2,7 +2,9 @@
 
 namespace L37sg0\Rockstar\Models\Enums;
 
-enum AttributeType: int
+enum AttributeType: string
 {
-    case Text = 1;
+    case Image = 'image';
+    case Meta = 'meta';
+    case Text = 'text';
 }

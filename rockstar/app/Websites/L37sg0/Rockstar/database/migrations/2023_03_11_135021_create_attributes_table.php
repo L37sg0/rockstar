@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use L37sg0\Rockstar\Models\TourDate as Model;
+use L37sg0\Rockstar\Models\Attribute as Model;
 
 return new class extends Migration
 {
@@ -14,8 +14,9 @@ return new class extends Migration
     {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->date(Model::FIELD_DATE);
-            $table->string(Model::FIELD_PLACE);
+            $table->string(Model::FIELD_KEY);
+            $table->text(Model::FIELD_VALUE);
+            $table->string(Model::FIELD_TYPE);
             $table->timestamps();
         });
     }
