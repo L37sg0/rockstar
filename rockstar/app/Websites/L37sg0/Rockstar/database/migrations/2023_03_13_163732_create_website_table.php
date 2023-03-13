@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use L37sg0\Rockstar\Models\Block as Model;
+use L37sg0\Rockstar\Models\Website as Model;
 
 return new class extends Migration
 {
@@ -14,9 +14,14 @@ return new class extends Migration
     {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string(Model::FIELD_TITLE);
-            $table->string(Model::FIELD_SLUG)->unique();
-            $table->text(Model::FIELD_CONTENT)->nullable();
+
+            $table->string(Model::FIELD_ICON_URL);
+            $table->string(Model::FIELD_FIRST_HOME_IMAGE_URL);
+            $table->string(Model::FIELD_SECOND_HOME_IMAGE_URL);
+            $table->string(Model::FIELD_THIRD_HOME_IMAGE_URL);
+            $table->text(Model::FIELD_BAND_TEXT);
+            $table->string(Model::FIELD_CONTACT_IMAGE_URL);
+
             $table->timestamps();
         });
     }

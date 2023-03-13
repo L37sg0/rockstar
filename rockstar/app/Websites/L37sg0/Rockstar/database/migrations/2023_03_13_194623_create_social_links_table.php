@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use L37sg0\Rockstar\Models\Page as Model;
+use L37sg0\Rockstar\Models\SocialLink as Model;
 
 return new class extends Migration
 {
@@ -14,10 +14,9 @@ return new class extends Migration
     {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string(Model::FIELD_TITLE);
+            $table->string(Model::FIELD_NAME);
             $table->string(Model::FIELD_URL);
-            $table->string(Model::FIELD_VIEW);
-            $table->boolean(Model::FIELD_ACTIVE)->default(true);
+            $table->string(Model::FIELD_ICON);
             $table->timestamps();
         });
     }
