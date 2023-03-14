@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Website\Http\Controllers;
+namespace L37sg0\Rockstar\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 

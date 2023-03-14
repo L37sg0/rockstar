@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Website;
+namespace L37sg0\Rockstar;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +26,7 @@ class Register extends ServiceProvider
         ], 'assets');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'rockstar');
         Blade::anonymousComponentPath(__DIR__ . '/resources/views', 'rockstar');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 
 }

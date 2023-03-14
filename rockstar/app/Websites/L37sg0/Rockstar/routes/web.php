@@ -1,7 +1,7 @@
 <?php
 
-use App\Website\Http\Controllers\AdminController;
-use App\Website\Http\Controllers\FrontendController;
+use L37sg0\Rockstar\Http\Controllers\AdminController;
+use L37sg0\Rockstar\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
