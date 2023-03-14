@@ -1,3 +1,7 @@
+@props([
+    'image' => 'https://tecdn.b-cdn.net/img/new/standard/city/041.jpg'
+])
+
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 <div x-data="showImage()" class="flex items-center justify-center h-screen mt-32 mb-32 bg-gray-200">
     <div class="bg-white rounded-lg shadow-xl md:w-9/12 lg:w-1/2">
@@ -9,7 +13,7 @@
                     class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="relative flex flex-col items-center justify-center pt-7">
                         <img id="preview"
-                            src="https://tecdn.b-cdn.net/img/new/standard/city/041.jpg"
+                            src="{{$image}}"
                             class="max-w-sm rounded border bg-white p-1 dark:border-neutral-700 dark:bg-neutral-800 group-hover:text-gray-600"
                             alt="..."/>
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
