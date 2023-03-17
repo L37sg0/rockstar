@@ -4,18 +4,41 @@ namespace L37sg0\Rockstar\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use L37sg0\Rockstar\Http\Requests\UpdateIconRequest;
 use L37sg0\Rockstar\Models\BandMember;
 use L37sg0\Rockstar\Models\SocialLink;
 use L37sg0\Rockstar\Models\TourDate;
 use L37sg0\Rockstar\Models\Website;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
     /**
      * Section for editing website icon
      */
-    public function iconSection(Request $request) {
-        $icon = Website::first()->getAttribute(Website::FIELD_ICON_URL);
+    public function iconSection()
+    {
+        $website = Website::first();
+        $icon = $website->getAttribute(Website::FIELD_ICON_URL);
+        return view('rockstar::admin.icon', compact('icon'));
+    }
+
+    public function iconSectionUpdate(UpdateIconRequest $request)
+    {
+//        dd($request->all());
+        $website = Website::first();
+        $icon = $website->getAttribute(Website::FIELD_ICON_URL);
+
+        if ($request->isMethod('post')) {
+            $file = $request->file('icon');
+            $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/icons', $filename);
+
+            $website->setAttribute(Website::FIELD_ICON_URL, str_replace('public', 'storage', $path));
+            $website->save();
+
+            return redirect()->back()->with('success', 'Icon updated successfully.');
+        }
         return view('rockstar::admin.icon', compact('icon'));
     }
 

@@ -1,5 +1,6 @@
 @props([
-    'image' => 'https://tecdn.b-cdn.net/img/new/standard/city/041.jpg'
+    'image' => 'https://tecdn.b-cdn.net/img/new/standard/city/041.jpg',
+    'id' => ''
 ])
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
@@ -19,12 +20,12 @@
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             Select a photo</p>
                     </div>
-                    <input type="file" class="opacity-0" accept="image/*" @change="showPreview(event)"/>
+                    <input type="file" class="opacity-0" accept="image/*" @change="showPreview(event)" id="{{$id}}" name="{{$id}}"/>
                 </label>
             </div>
         </div>
         <div class="flex p-2 space-x-4">
-            <button class="w-full px-4 py-2 text-white bg-red-500 rounded shadow-xl">Update</button>
+            <button class="w-full px-4 py-2 text-white bg-red-500 rounded shadow-xl" type="submit">Update</button>
         </div>
     </div>
 </div>

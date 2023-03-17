@@ -2,8 +2,8 @@
 <x-app-layout>
         <x-slot:navigationLinks>
 
-            <x-nav-link :href="route('dashboard.icon-section')"
-                        :active="request()->routeIs('dashboard.icon-section')">Icon
+            <x-nav-link :href="route('dashboard.icon-section.view')"
+                        :active="request()->routeIs('dashboard.icon-section.view')">Icon
             </x-nav-link>
             <x-nav-link :href="route('dashboard.home-section')"
                         :active="request()->routeIs('dashboard.home-section')">Home
@@ -22,8 +22,8 @@
             </x-nav-link>
         </x-slot:navigationLinks>
         <x-slot:responsiveNavigation>
-            <x-responsive-nav-link :href="route('dashboard.icon-section')"
-                                   :active="request()->routeIs('dashboard.icon-section')">
+            <x-responsive-nav-link :href="route('dashboard.icon-section.view')"
+                                   :active="request()->routeIs('dashboard.icon-section.view')">
                 Icon
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.home-section')"
