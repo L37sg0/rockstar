@@ -28,13 +28,16 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::match(['get', 'post'], '', function () {
             return redirect(\route('dashboard.icon-section.view'));
         });
+        /** Icon Section */
         Route::group(['as' => 'icon-section.', 'prefix' => 'icon-section'], static function() {
             Route::get('view', [AdminController::class, 'iconSection'])->name('view');
             Route::post('update', [AdminController::class, 'iconSectionUpdate'])->name('update');
         });
-//        Route::match(['get', 'post'],'icon-section', [AdminController::class, 'iconSection'])->name('icon-section');
-//        Route::post('icon-section', [AdminController::class, 'iconSectionUpdate'])->name('update');
-        Route::match(['get', 'post'], 'home-section', [AdminController::class, 'homeSection'])->name('home-section');
+        /** Home Section */
+        Route::group(['as' => 'home-section.', 'prefix' => 'home-section'], static function() {
+            Route::get('view', [AdminController::class, 'homeSection'])->name('view');
+            Route::post('update/{imageName}', [AdminController::class, 'homeSectionUpdate'])->name('update');
+        });
         Route::match(['get', 'post'], 'band-section', [AdminController::class, 'bandSection'])->name('band-section');
         Route::match(['get', 'post'], 'tour-section', [AdminController::class, 'tourSection'])->name('tour-section');
         Route::match(['get', 'post'], 'contact-section', [AdminController::class, 'contactSection'])->name('contact-section');

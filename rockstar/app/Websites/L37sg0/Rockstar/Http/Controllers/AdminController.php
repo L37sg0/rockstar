@@ -3,7 +3,12 @@
 namespace L37sg0\Rockstar\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use L37sg0\Rockstar\Http\Requests\UpdateHomeImageRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateIconRequest;
 use L37sg0\Rockstar\Models\BandMember;
 use L37sg0\Rockstar\Models\SocialLink;
@@ -23,35 +28,56 @@ class AdminController extends Controller
         return view('rockstar::admin.icon', compact('icon'));
     }
 
+    /**
+     * @param UpdateIconRequest $request
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|RedirectResponse
+     */
     public function iconSectionUpdate(UpdateIconRequest $request)
     {
-//        dd($request->all());
         $website = Website::first();
-        $icon = $website->getAttribute(Website::FIELD_ICON_URL);
 
-        if ($request->isMethod('post')) {
-            $file = $request->file('icon');
-            $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/icons', $filename);
+        $file = $request->file('icon');
+        $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('public/icons', $filename);
 
-            $website->setAttribute(Website::FIELD_ICON_URL, str_replace('public', 'storage', $path));
-            $website->save();
+        $website->setAttribute(Website::FIELD_ICON_URL, str_replace('public', 'storage', $path));
+        $website->save();
 
-            return redirect()->back()->with('success', 'Icon updated successfully.');
-        }
-        return view('rockstar::admin.icon', compact('icon'));
+        return redirect()->back()->with('success', 'Icon updated successfully.');
     }
 
     /**
      * Section for editing home images
      */
-    public function homeSection() {
+    public function homeSection()
+    {
+        $website = Website::first();
+
         $homeImages = [
-            Website::first()->getAttribute(Website::FIELD_FIRST_HOME_IMAGE_URL),
-            Website::first()->getAttribute(Website::FIELD_SECOND_HOME_IMAGE_URL),
-            Website::first()->getAttribute(Website::FIELD_THIRD_HOME_IMAGE_URL)
+            Website::FIELD_FIRST_HOME_IMAGE_URL => $website->getAttribute(Website::FIELD_FIRST_HOME_IMAGE_URL),
+            Website::FIELD_SECOND_HOME_IMAGE_URL => $website->getAttribute(Website::FIELD_SECOND_HOME_IMAGE_URL),
+            Website::FIELD_THIRD_HOME_IMAGE_URL => $website->getAttribute(Website::FIELD_THIRD_HOME_IMAGE_URL)
         ];
         return view('rockstar::admin.home', compact('homeImages'));
+    }
+
+    /**
+     * @param UpdateHomeImageRequest $request
+     * @param $imageName
+     * @return RedirectResponse
+     */
+    public function homeSectionUpdate(UpdateHomeImageRequest $request, $imageName)
+    {
+        $website = Website::first();
+
+        $file = $request->file('image');
+        $filename = Str::random(20). '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('public/home-images', $filename);
+
+        $website->setAttribute($imageName, str_replace('public', 'storage', $path));
+        $website->save();
+
+        return redirect()->back()->with('success', 'Image updated successfully.');
     }
 
     /**

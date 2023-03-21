@@ -20,7 +20,4 @@ class UpdateIconRequest extends FormRequest
         ];
     }
 
-//    public function redirectTo() {
-//        return route('dashboard.icon-section.view');
-//    }
 }

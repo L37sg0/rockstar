@@ -5,8 +5,8 @@
             <x-nav-link :href="route('dashboard.icon-section.view')"
                         :active="request()->routeIs('dashboard.icon-section.view')">Icon
             </x-nav-link>
-            <x-nav-link :href="route('dashboard.home-section')"
-                        :active="request()->routeIs('dashboard.home-section')">Home
+            <x-nav-link :href="route('dashboard.home-section.view')"
+                        :active="request()->routeIs('dashboard.home-section.view')">Home
             </x-nav-link>
             <x-nav-link :href="route('dashboard.band-section')"
                         :active="request()->routeIs('dashboard.band-section')">Band
@@ -26,8 +26,8 @@
                                    :active="request()->routeIs('dashboard.icon-section.view')">
                 Icon
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard.home-section')"
-                                   :active="request()->routeIs('dashboard.home-section')">
+            <x-responsive-nav-link :href="route('dashboard.home-section.view')"
+                                   :active="request()->routeIs('dashboard.home-section.view')">
                 Home
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.band-section')"
