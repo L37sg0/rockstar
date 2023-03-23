@@ -10,7 +10,7 @@ class UpdateHomeImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:4096', new Image(1920, 1280)]
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:4096', new Image(1920, 1280)]
         ];
     }
 

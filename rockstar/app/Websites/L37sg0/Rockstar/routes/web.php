@@ -38,7 +38,12 @@ Route::middleware(['web', 'auth'])->group(function () {
             Route::get('view', [AdminController::class, 'homeSection'])->name('view');
             Route::post('update/{imageName}', [AdminController::class, 'homeSectionUpdate'])->name('update');
         });
-        Route::match(['get', 'post'], 'band-section', [AdminController::class, 'bandSection'])->name('band-section');
+        /** Band Section */
+        Route::group(['as' => 'band-section.', 'prefix' => 'band-section'], static function() {
+            Route::get('view', [AdminController::class, 'bandSection'])->name('view');
+            Route::post('band-member-update/{bandMember}', [AdminController::class, 'bandMemberUpdate'])->name('band-member-update');
+            Route::post('band-text-update', [AdminController::class, 'bandTextUpdate'])->name('band-text-update');
+        });
         Route::match(['get', 'post'], 'tour-section', [AdminController::class, 'tourSection'])->name('tour-section');
         Route::match(['get', 'post'], 'contact-section', [AdminController::class, 'contactSection'])->name('contact-section');
         Route::match(['get', 'post'], 'social-section', [AdminController::class, 'socialSection'])->name('social-section');

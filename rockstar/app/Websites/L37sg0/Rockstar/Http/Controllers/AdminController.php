@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use L37sg0\Rockstar\Http\Requests\UpdateBandMemberRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateHomeImageRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateIconRequest;
 use L37sg0\Rockstar\Models\BandMember;
@@ -83,13 +84,50 @@ class AdminController extends Controller
     /**
      * Section for editing band images and text
      */
-    public function bandSection() {
+    public function bandSection()
+    {
         $bandText = Website::first()->getAttribute(Website::FIELD_BAND_TEXT);
         $bandMembers = BandMember::all();
         return view('rockstar::admin.band', compact(
             'bandMembers',
             'bandText'
         ));
+    }
+
+    /**
+     * @param UpdateBandMemberRequest $request
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function bandMemberUpdate(UpdateBandMemberRequest $request, $bandMember)
+    {
+        $bandMember = BandMember::find($bandMember);
+
+        $file = $request->file('image');
+        $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('public/band-images', $filename);
+        $path = str_replace('public', 'storage', $path);
+
+        $bandMember->fill([
+            BandMember::FIELD_IMAGE_URL => $path,
+            BandMember::FIELD_NAME => $request->get('name'),
+            BandMember::FIELD_DESCRIPTION => $request->get('description')
+        ])->save();
+
+        return redirect()->back()->with('success', 'Band member updated successfully.');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function bandTextUpdate(Request $request)
+    {
+        $website = Website::first();
+        $website->setAttribute(Website::FIELD_BAND_TEXT, $request->get('text'));
+        $website->save();
+
+        return redirect()->back()->with('success', 'Band text updated successfully.');
     }
 
     /**

@@ -8,8 +8,8 @@
             <x-nav-link :href="route('dashboard.home-section.view')"
                         :active="request()->routeIs('dashboard.home-section.view')">Home
             </x-nav-link>
-            <x-nav-link :href="route('dashboard.band-section')"
-                        :active="request()->routeIs('dashboard.band-section')">Band
+            <x-nav-link :href="route('dashboard.band-section.view')"
+                        :active="request()->routeIs('dashboard.band-section.view')">Band
             </x-nav-link>
             <x-nav-link :href="route('dashboard.tour-section')"
                         :active="request()->routeIs('dashboard.tour-section')">Tour
@@ -30,8 +30,8 @@
                                    :active="request()->routeIs('dashboard.home-section.view')">
                 Home
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard.band-section')"
-                                   :active="request()->routeIs('dashboard.band-section')">
+            <x-responsive-nav-link :href="route('dashboard.band-section.view')"
+                                   :active="request()->routeIs('dashboard.band-section.view')">
                 Band
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.tour-section')"

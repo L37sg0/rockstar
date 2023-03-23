@@ -5,11 +5,20 @@
 
     <!-- Band Section Text-->
     <div class="flex flex-row">
-
-        <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="bandText">Band Text</label>
-        <textarea id="bandText" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" name="name" required>{{$bandText ?? ''}}</textarea>
+    <form method="post"
+          action="{{route('dashboard.band-section.band-text-update')}}">
+        @csrf
+        <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="bandText">
+            {{__('Band Text')}}
+        </label>
+        <textarea id="bandText"
+                  class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+                  name="text" required>
+            {{$bandText ?? ''}}
+        </textarea>
         <x-input-error :messages="$errors->get('bandText')" class="mt-2"/>
-        <x-primary-button>Update</x-primary-button>
+        <x-primary-button :type="'submit'">Update</x-primary-button>
+    </form>
     </div>
 
     <!-- Band Section Members-->
@@ -19,16 +28,26 @@
         @endphp
         @foreach($bandMembers as $member)
             <div class="basis-1/3">
-                <x-image-input :image="asset($member->getAttribute(BandMember::FIELD_IMAGE_URL))"/>
-                <x-input-label for="name" :value="__('Member Name')"/>
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$member->getAttribute(BandMember::FIELD_NAME)" required
-                              autofocus autocomplete="name"/>
-                <x-input-error :messages="$errors->get('name')" class="mt-2"/>
-                <x-input-label for="shortDesc" :value="__('Short Description')"/>
-                <x-text-input id="shortDesc" class="block mt-1 w-full" type="text" name="shortDesc"
-                              :value="$member->getAttribute(BandMember::FIELD_DESCRIPTION)" required
-                              autofocus autocomplete="shortDesc"/>
-                <x-input-error :messages="$errors->get('shortDesc')" class="mt-2"/>
+                <form method="post"
+                      action="{{route('dashboard.band-section.band-member-update', $member)}}"
+                      enctype="multipart/form-data">
+                    @csrf
+                    <x-image-input :image="asset($member->getAttribute(BandMember::FIELD_IMAGE_URL))"
+                                   :name="'image'"
+                                   :id="'image' . $member->getAttribute(BandMember::FIELD_ID)"/>
+                    <x-input-label for="name{{$member->getAttribute(BandMember::FIELD_ID)}}" :value="__('Member Name')"/>
+                    <x-text-input id="name{{$member->getAttribute(BandMember::FIELD_ID)}}"
+                                  class="block mt-1 w-full" type="text" name="name"
+                                  :value="$member->getAttribute(BandMember::FIELD_NAME)" required
+                                  autofocus autocomplete="name"/>
+                    <x-input-label for="description{{$member->getAttribute(BandMember::FIELD_ID)}}"
+                                   :value="__('Short Description')"/>
+                    <x-text-input id="description{{$member->getAttribute(BandMember::FIELD_ID)}}"
+                                  class="block mt-1 w-full" type="text" name="description"
+                                  :value="$member->getAttribute(BandMember::FIELD_DESCRIPTION)" required
+                                  autofocus autocomplete="description"/>
+                    <x-input-error :messages="$errors->all()" class="mt-2"/>
+                </form>
             </div>
         @endforeach
     </div>
