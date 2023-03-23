@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use L37sg0\Rockstar\Http\Requests\UpdateBandMemberRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateHomeImageRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateIconRequest;
+use L37sg0\Rockstar\Http\Requests\UpdateTourDateRequest;
 use L37sg0\Rockstar\Models\BandMember;
 use L37sg0\Rockstar\Models\SocialLink;
 use L37sg0\Rockstar\Models\TourDate;
@@ -133,9 +134,42 @@ class AdminController extends Controller
     /**
      * Section for editing tour upcoming dates
      */
-    public function tourSection() {
+    public function tourSection()
+    {
         $tourDates = TourDate::orderBy(TourDate::FIELD_DATE, 'ASC')->get();
         return view('rockstar::admin.tour', compact('tourDates'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $tour
+     * @return RedirectResponse
+     */
+    public function tourSectionUpdate(UpdateTourDateRequest $request, $tour=null)
+    {
+        $tourDate = new TourDate();
+        if (!empty($tour)) {
+            $tourDate = TourDate::find($tour);
+        }
+
+        $tourDate->fill([
+            TourDate::FIELD_DATE => $request->get('date'),
+            TourDate::FIELD_PLACE => $request->get('place')
+        ])->save();
+
+        return redirect()->back()->with('success', 'Tour date updated successfully.');
+    }
+
+    /**
+     * @param $tour
+* @return RedirectResponse
+     */
+    public function tourSectionDelete($tour)
+    {
+        $tourDate = TourDate::find($tour);
+        $tourDate->delete();
+
+        return redirect()->back()->with('success', 'Tour date deleted successfully.');
     }
 
     /**

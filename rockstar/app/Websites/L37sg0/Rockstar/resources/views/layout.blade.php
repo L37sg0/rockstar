@@ -11,8 +11,8 @@
             <x-nav-link :href="route('dashboard.band-section.view')"
                         :active="request()->routeIs('dashboard.band-section.view')">Band
             </x-nav-link>
-            <x-nav-link :href="route('dashboard.tour-section')"
-                        :active="request()->routeIs('dashboard.tour-section')">Tour
+            <x-nav-link :href="route('dashboard.tour-section.view')"
+                        :active="request()->routeIs('dashboard.tour-section.view')">Tour
             </x-nav-link>
             <x-nav-link :href="route('dashboard.contact-section')"
                         :active="request()->routeIs('dashboard.contact-section')">Contact
@@ -34,8 +34,8 @@
                                    :active="request()->routeIs('dashboard.band-section.view')">
                 Band
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard.tour-section')"
-                                   :active="request()->routeIs('dashboard.tour-section')">
+            <x-responsive-nav-link :href="route('dashboard.tour-section.view')"
+                                   :active="request()->routeIs('dashboard.tour-section.view')">
                 Tour
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.contact-section')"

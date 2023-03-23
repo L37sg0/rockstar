@@ -19,6 +19,6 @@ class UpdateBandMemberRequest extends FormRequest
 
     public function messages()
     {
-        return ['home.dimensions' => 'Image should be with max of 512x512 px.'];
+        return ['band.image' => 'Image should be with max of 512x512 px.'];
     }
 }
