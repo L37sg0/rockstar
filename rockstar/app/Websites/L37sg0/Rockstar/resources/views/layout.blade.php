@@ -14,8 +14,8 @@
             <x-nav-link :href="route('dashboard.tour-section.view')"
                         :active="request()->routeIs('dashboard.tour-section.view')">Tour
             </x-nav-link>
-            <x-nav-link :href="route('dashboard.contact-section')"
-                        :active="request()->routeIs('dashboard.contact-section')">Contact
+            <x-nav-link :href="route('dashboard.contact-section.view')"
+                        :active="request()->routeIs('dashboard.contact-section.view')">Contact
             </x-nav-link>
             <x-nav-link :href="route('dashboard.social-section')"
                         :active="request()->routeIs('dashboard.social-section')">Social
@@ -38,8 +38,8 @@
                                    :active="request()->routeIs('dashboard.tour-section.view')">
                 Tour
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard.contact-section')"
-                                   :active="request()->routeIs('dashboard.contact-section')">
+            <x-responsive-nav-link :href="route('dashboard.contact-section.view')"
+                                   :active="request()->routeIs('dashboard.contact-section.view')">
                 Contact
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.social-section')"

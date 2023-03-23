@@ -50,7 +50,11 @@ Route::middleware(['web', 'auth'])->group(function () {
             Route::post('update/{tour?}', [AdminController::class, 'tourSectionUpdate'])->name('update');
             Route::get('delete/{tour}', [AdminController::class, 'tourSectionDelete'])->name('delete');
         });
-        Route::match(['get', 'post'], 'contact-section', [AdminController::class, 'contactSection'])->name('contact-section');
+        /** Contact Section */
+        Route::group(['as' => 'contact-section.', 'prefix' => 'contact-section'], static function() {
+            Route::get('view', [AdminController::class, 'contactSection'])->name('view');
+            Route::post('update', [AdminController::class, 'contactSectionUpdate'])->name('update');
+        });
         Route::match(['get', 'post'], 'social-section', [AdminController::class, 'socialSection'])->name('social-section');
     });
 });

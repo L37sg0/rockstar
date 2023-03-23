@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use L37sg0\Rockstar\Http\Requests\UpdateBandMemberRequest;
+use L37sg0\Rockstar\Http\Requests\UpdateContactImageRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateHomeImageRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateIconRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateTourDateRequest;
@@ -175,9 +176,29 @@ class AdminController extends Controller
     /**
      * Section for editing contact form image
      */
-    public function contactSection() {
+    public function contactSection()
+    {
         $contactImage = Website::first()->getAttribute(Website::FIELD_CONTACT_IMAGE_URL);
         return view('rockstar::admin.contact', compact('contactImage'));
+    }
+
+    /**
+     * @param UpdateContactImageRequest $request
+     * @return RedirectResponse
+     */
+    public function contactSectionUpdate(UpdateContactImageRequest $request)
+    {
+        $website = Website::first();
+
+        $file = $request->file('image');
+        $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('public/contact-images', $filename);
+        $path = str_replace('public', 'storage', $path);
+
+        $website->setAttribute(Website::FIELD_CONTACT_IMAGE_URL, $path);
+        $website->save();
+
+        return redirect()->back()->with('success', 'Contact image updated successfully.');
     }
 
     /**
