@@ -17,8 +17,8 @@
             <x-nav-link :href="route('dashboard.contact-section.view')"
                         :active="request()->routeIs('dashboard.contact-section.view')">Contact
             </x-nav-link>
-            <x-nav-link :href="route('dashboard.social-section')"
-                        :active="request()->routeIs('dashboard.social-section')">Social
+            <x-nav-link :href="route('dashboard.social-section.view')"
+                        :active="request()->routeIs('dashboard.social-section.view')">Social
             </x-nav-link>
         </x-slot:navigationLinks>
         <x-slot:responsiveNavigation>
@@ -42,8 +42,8 @@
                                    :active="request()->routeIs('dashboard.contact-section.view')">
                 Contact
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard.social-section')"
-                                   :active="request()->routeIs('dashboard.social-section')">
+            <x-responsive-nav-link :href="route('dashboard.social-section.view')"
+                                   :active="request()->routeIs('dashboard.social-section.view')">
                 Social
             </x-responsive-nav-link>
 

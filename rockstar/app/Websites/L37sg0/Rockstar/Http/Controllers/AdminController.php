@@ -12,6 +12,7 @@ use L37sg0\Rockstar\Http\Requests\UpdateBandMemberRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateContactImageRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateHomeImageRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateIconRequest;
+use L37sg0\Rockstar\Http\Requests\UpdateSocialLinkRequest;
 use L37sg0\Rockstar\Http\Requests\UpdateTourDateRequest;
 use L37sg0\Rockstar\Models\BandMember;
 use L37sg0\Rockstar\Models\SocialLink;
@@ -204,8 +205,18 @@ class AdminController extends Controller
     /**
      * Section for editing social links on footer
      */
-    public function socialSection() {
+    public function socialSection()
+    {
         $socialLinks = SocialLink::all();
         return view('rockstar::admin.social', compact('socialLinks'));
+    }
+
+    public function socialSectionUpdate(UpdateSocialLinkRequest $request, $link)
+    {
+        $socialLink = SocialLink::find($link);
+        $socialLink->setAttribute(SocialLink::FIELD_URL, $request->get('link'));
+        $socialLink->save();
+
+        return redirect()->back()->with('success', 'Social link updated successfully.');
     }
 }

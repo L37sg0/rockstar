@@ -179,7 +179,7 @@
         /** @var SocialLink $socialLink */
     @endphp
     @foreach($socialLinks as $socialLink)
-        <a href="https://{{$socialLink->getAttribute(SocialLink::FIELD_URL)}}" target="_blank">
+        <a href="{{$socialLink->getAttribute(SocialLink::FIELD_URL)}}" target="_blank">
             <i class="{{$socialLink->getAttribute(SocialLink::FIELD_ICON)}}"></i>
         </a>
     @endforeach

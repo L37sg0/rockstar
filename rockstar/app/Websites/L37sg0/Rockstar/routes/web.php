@@ -55,6 +55,11 @@ Route::middleware(['web', 'auth'])->group(function () {
             Route::get('view', [AdminController::class, 'contactSection'])->name('view');
             Route::post('update', [AdminController::class, 'contactSectionUpdate'])->name('update');
         });
+        /** Social Section */
+        Route::group(['as' => 'social-section.', 'social-section'], static function() {
+            Route::get('view', [AdminController::class, 'socialSection'])->name('view');
+            Route::post('update/{link}', [AdminController::class, 'socialSectionUpdate'])->name('update');
+        });
         Route::match(['get', 'post'], 'social-section', [AdminController::class, 'socialSection'])->name('social-section');
     });
 });

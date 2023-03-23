@@ -9,16 +9,21 @@
     @endphp
     @foreach($socialLinks as $socialLink)
         <div class="flex flex-row ml-3">
-            <i class="{{$socialLink->getAttribute(SocialLink::FIELD_ICON)}}"></i>
-            @php
-            $id = strtolower($socialLink->getAttribute(SocialLink::FIELD_NAME))
-            @endphp
-            <x-input-label for="$id" :value="__($socialLink->getAttribute(SocialLink::FIELD_NAME))"/>
-            <x-text-input id="$id" class="block mt-1 w-full" type="url" name="$id" :value="$socialLink->getAttribute(SocialLink::FIELD_URL)"
-                          required
-                          autofocus autocomplete="$id"/>
-            <x-input-error :messages="$errors->get($id)" class="mt-2"/>
-            <x-primary-button>Update</x-primary-button>
+            <form method="post"
+                  action="{{route('dashboard.social-section.update', $socialLink)}}">
+                @csrf
+                <i class="{{$socialLink->getAttribute(SocialLink::FIELD_ICON)}}"></i>
+                @php
+                    $id = strtolower($socialLink->getAttribute(SocialLink::FIELD_NAME))
+                @endphp
+                <x-input-label for="$id" :value="__($socialLink->getAttribute(SocialLink::FIELD_NAME))"/>
+                <x-text-input id="$id" class="block mt-1 w-full" type="url" name="link"
+                              :value="$socialLink->getAttribute(SocialLink::FIELD_URL)"
+                              required
+                              autofocus autocomplete="$id"/>
+                <x-input-error :messages="$errors->all()" class="mt-2"/>
+                <x-primary-button :type="'submit'">Update</x-primary-button>
+            </form>
         </div>
     @endforeach
 </x-rockstar::layout>

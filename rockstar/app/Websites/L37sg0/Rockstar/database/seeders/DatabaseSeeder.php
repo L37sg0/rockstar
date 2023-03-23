@@ -44,27 +44,27 @@ class DatabaseSeeder extends Seeder
         $socialLinks = [
             'facebook' => [
                 SocialLink::FIELD_NAME => 'Facebook',
-                SocialLink::FIELD_URL => 'facebook.com',
+                SocialLink::FIELD_URL => 'https://facebook.com',
                 SocialLink::FIELD_ICON => 'fa fa-facebook-official'
             ],
             'twitter' => [
                 SocialLink::FIELD_NAME => 'Twitter',
-                SocialLink::FIELD_URL => 'twitter.com',
+                SocialLink::FIELD_URL => 'https://twitter.com',
                 SocialLink::FIELD_ICON => 'fa fa-twitter'
             ],
             'pinterest' => [
                 SocialLink::FIELD_NAME => 'Pinterest',
-                SocialLink::FIELD_URL => 'pinterest.com',
+                SocialLink::FIELD_URL => 'https://pinterest.com',
                 SocialLink::FIELD_ICON => 'fa fa-pinterest-p'
             ],
             'flickr' => [
                 SocialLink::FIELD_NAME => 'Flickr',
-                SocialLink::FIELD_URL => 'flickr.com',
+                SocialLink::FIELD_URL => 'https://flickr.com',
                 SocialLink::FIELD_ICON => 'fa fa-flickr'
             ],
             'linkedin' => [
                 SocialLink::FIELD_NAME => 'Linkedin',
-                SocialLink::FIELD_URL => 'linkedin.com',
+                SocialLink::FIELD_URL => 'https://linkedin.com',
                 SocialLink::FIELD_ICON => 'fa fa-linkedin'
             ],
         ];
