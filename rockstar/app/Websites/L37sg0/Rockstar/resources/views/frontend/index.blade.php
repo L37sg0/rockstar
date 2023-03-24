@@ -1,3 +1,15 @@
+@php use Illuminate\Support\Collection;use L37sg0\Rockstar\Models\BandMember;use L37sg0\Rockstar\Models\SocialLink;use L37sg0\Rockstar\Models\Website; @endphp
+@php
+    /**
+    * @var Website $websiteData
+    * @var Collection $bandMembers
+    * @var Collection $tourDates
+    * @var Collection $socialLinks
+    */
+
+
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
     <title>{{ config('app.name', 'Rockstar') }}</title>
+    <link rel="icon" type="image/x-icon" href="{{asset($websiteData->getAttribute(Website::FIELD_ICON_URL))}}">
 </head>
 <body>
 <!-- Navigation -->
@@ -24,9 +37,12 @@
 
 <!-- Slide Show -->
 <div id="home">
-    <img alt="Rockstar" class="mySlides" src="{{asset('rockstar/image/img_band_la.jpg')}}" style="width: 100%">
-    <img alt="Rockstar" class="mySlides" src="{{asset('rockstar/image/img_band_ny.jpg')}}" style="width: 100%">
-    <img alt="Rockstar" class="mySlides" src="{{asset('rockstar/image/img_band_chicago.jpg')}}" style="width: 100%">
+    <img alt="Rockstar" class="mySlides"
+         src="{{asset($websiteData->getAttribute(Website::FIELD_FIRST_HOME_IMAGE_URL))}}" style="width: 100%">
+    <img alt="Rockstar" class="mySlides"
+         src="{{asset($websiteData->getAttribute(Website::FIELD_SECOND_HOME_IMAGE_URL))}}" style="width: 100%">
+    <img alt="Rockstar" class="mySlides"
+         src="{{asset($websiteData->getAttribute(Website::FIELD_THIRD_HOME_IMAGE_URL))}}" style="width: 100%">
 </div>
 
 <!-- Sections and Articles-->
@@ -39,34 +55,21 @@
     </section>
 
     <section class="w3-container w3-center w3-content" style="max-width: 600px">
-        <p class="w3-justify">
-            We have created a fictional band website. Hope you like our music.
-            We are glad that you have visited our website. Keep scrolling or use the navigation.
-            We have created a fictional band website. Hope you like our music.
-            We are glad that you have visited our website. Keep scrolling or use the navigation.
-            We have created a fictional band website. Hope you like our music.
-            We are glad that you have visited our website. Keep scrolling or use the navigation.
-            We have created a fictional band website. Hope you like our music.
-            We are glad that you have visited our website. Keep scrolling or use the navigation.
-        </p>
+        <p class="w3-justify">{{$websiteData->getAttribute(Website::FIELD_BAND_TEXT)}}</p>
     </section>
 
     <section class="w3-row-padding w3-center w3-light-gray">
-        <article class="w3-third">
-            <p>John</p>
-            <img src="{{asset('rockstar/image/john.png')}}" alt="John" style="width: 100%">
-            <p>John is the smartest</p>
-        </article>
-        <article class="w3-third">
-            <p>Paul</p>
-            <img src="{{asset('rockstar/image/paul.png')}}" alt="Paul" style="width: 100%">
-            <p>Paul is the prettiest</p>
-        </article>
-        <article class="w3-third">
-            <p>Ringo</p>
-            <img src="{{asset('rockstar/image/ringo.png')}}" alt="Ringo" style="width: 100%">
-            <p>Ringo is the funniest</p>
-        </article>
+        @php
+            /** @var BandMember $member */
+        @endphp
+        @foreach($bandMembers as $member)
+            <article class="w3-third">
+                <p>{{$member->getAttribute(BandMember::FIELD_NAME)}}</p>
+                <img src="{{asset($member->getAttribute(BandMember::FIELD_IMAGE_URL))}}"
+                     alt="{{$member->getAttribute(BandMember::FIELD_NAME)}}" style="width: 100%">
+                <p>{{$member->getAttribute(BandMember::FIELD_DESCRIPTION)}}</p>
+            </article>
+        @endforeach
     </section>
 </div>
 
@@ -77,88 +80,30 @@
     </section>
 
     <section class="w3-row-padding w3-center w3-dark-gray">
-        <article class="w3-third">
-            <h2 class="w3-dark-grey">June '23</h2>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">5th <span
-                            class="venue">Wanda Metropolitano Stadium MADRID, SPAIN</span></h3>
-                </a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">5th <span class="venue">Olympic Stadium MUNICH, GERMANY</span></h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">9th <span class="venue">Anfield Stadium LIVERPOOL, UK</span></h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">17th <span
-                            class="venue">Wankdorf Stadium BERN, SWITZERLAND - CANCELLED</span></h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">21st <span class="venue">San Siro Stadium MILAN, ITALY</span></h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">25th <span
-                            class="venue">American Express Presents BST Hyde Park LONDON, UK</span></h3></a>
-            </div>
-        </article>
-
-        <article class="w3-third">
-            <h2 class="w3-dark-grey">July '23</h2>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">3rd <span
-                            class="venue">American Express Presents BST Hyde Park LONDON, UK</span></h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">7th <span
-                            class="venue">Johan Cruijff ArenA AMSTERDAM, NETHERLANDS </span>
-                    </h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">11th <span class="venue">King Baudouin Stadium BRUSSELS, BELGIUM</span>
-                    </h3>
-                </a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">15th <span class="venue">Ernst Happel Stadium - VIENNA, AUSTRIA</span>
-                    </h3>
-                </a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">19th <span class="venue">Groupama Stadium LYON, FRANCE</span></h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">23rd <span class="venue">Hippodrome ParisLongchamp PARIS, FRANCE</span>
-                    </h3>
-                </a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">27th <span class="venue">Veltins-Arena GELSENKIRCHEN, GERMANY</span>
-                    </h3></a>
-            </div>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">31st <span class="venue">Friends Arena STOCKHOLM, SWEDEN</span></h3>
-                </a>
-            </div>
-        </article>
-
-        <article class="w3-third">
-            <h2 class="w3-dark-grey">August '23</h2>
-            <div class="tourdate">
-                <a href="#tour"><h3 class="date">3rd <span class="venue">Waldbühne BERLIN, GERMANY</span></h3></a>
-            </div>
-        </article>
+        @foreach($tourDatesByMonth as $monthYear => $tourDates)
+            <article class="w3-third">
+                <h2 class="w3-dark-grey">{{$monthYear}}</h2>
+                @foreach($tourDates as $tourDate)
+                    <div class="tourdate">
+                        <a href="#tour"><h3 class="date">{{$tourDate['date']}} <span
+                                    class="venue">{{$tourDate['place']}}</span></h3>
+                        </a>
+                    </div>
+                @endforeach
+            </article>
+        @endforeach
     </section>
 </div>
 
-<!-- Tour Section-->
+<!-- Contact Section-->
 <div id="contact" class="container">
     <section class="w3-container w3-center w3-content" style="max-width: 600px">
         <h2 class="w3-wide">CONTACT US</h2>
     </section>
     <div class="row">
         <div class="column">
-            <img alt="Rockstar" src="{{asset('rockstar/image/rockstar.jpg')}}" style="width:100%">
+            <img alt="Rockstar" src="{{asset($websiteData->getAttribute(Website::FIELD_CONTACT_IMAGE_URL))}}"
+                 style="width:100%">
         </div>
         <div class="column">
             <form action="#">
@@ -230,11 +175,14 @@
 
 <!-- Footer -->
 <footer class="w3-container w3-padding-64 w3-center w3-black w3-xlarge">
-    <a href="#"><i class="fa fa-facebook-official"></i></a>
-    <a href="#"><i class="fa fa-pinterest-p"></i></a>
-    <a href="#"><i class="fa fa-twitter"></i></a>
-    <a href="#"><i class="fa fa-flickr"></i></a>
-    <a href="#"><i class="fa fa-linkedin"></i></a>
+    @php
+        /** @var SocialLink $socialLink */
+    @endphp
+    @foreach($socialLinks as $socialLink)
+        <a href="{{$socialLink->getAttribute(SocialLink::FIELD_URL)}}" target="_blank">
+            <i class="{{$socialLink->getAttribute(SocialLink::FIELD_ICON)}}"></i>
+        </a>
+    @endforeach
     <p class="w3-medium">
         Created by <a href="https://www.l37sg0.com" target="_blank">L37sg0</a>
     </p>
